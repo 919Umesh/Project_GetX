@@ -6,9 +6,6 @@ class ApiEndpoint {
       : 'http://192.168.1.67:3000';
   static const String imagebaseUrl =
       kDebugMode ? 'http://192.168.101.2:8080' : 'http://192.168.101.2:8080';
-  static const String omsbaseUrl = kDebugMode
-      ? 'http://myomsapi.globaltechsolution.com.np:802/api'
-      : 'http://myomsapi.globaltechsolution.com.np:802/api';
 
   static const String forgetPassword = '';
   static const String signup = '/user/sign-up/';
