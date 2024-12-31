@@ -1,9 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 class ApiEndpoint {
-  // static const String baseUrl = kDebugMode
-  //     ? 'http://myomsapi.globaltechsolution.com.np:802/api'
-  //     : 'http://myomsapi.globaltechsolution.com.np:802/api';
   static const String baseUrl = kDebugMode
       ? 'http://192.168.1.67:3000'
       : 'http://192.168.1.67:3000';
