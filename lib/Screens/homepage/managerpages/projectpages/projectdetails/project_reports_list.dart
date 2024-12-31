@@ -26,7 +26,7 @@ class ProjectReportsList extends GetView<ProjectDetailWrapperGetx> {
             height: 24.adaptSize,
           ),
           const Text(
-            "Design Estimate & Construction of residential building at anamnagar, kathmandu.",
+            "Design Estimate & Construction",
             style: TextStyle(
                 fontFamily: "Inter",
                 fontSize: 12,
@@ -74,7 +74,7 @@ class ProjectReportsList extends GetView<ProjectDetailWrapperGetx> {
                             height: 8,
                           ),
                           Text(
-                            "Anamnagar Kathmandu dawd awd awd awnamnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd d awd awdu dawd awd awd awnamnahmandu dawd awd awd namnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd d awd awdu dawd awd awd awnamnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd namnagar Kathmandu dawd awd awd d awd awd awd ",
+                            "Kathmandu",
                             style: TextStyle(
                               fontFamily: "Inter",
                               fontSize: 14,

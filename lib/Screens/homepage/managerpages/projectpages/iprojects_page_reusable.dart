@@ -116,7 +116,7 @@ class ProjectsListPage extends GetView<ManagerPagesGetx> {
                             height: 8,
                           ),
                           Text(
-                            "Anamnagar Kathmandu",
+                            "Kathmandu",
                             style: TextStyle(
                               fontFamily: "Inter",
                               fontSize: 12,

@@ -63,7 +63,7 @@ class LoginScreenAdmin extends GetView<LoginController> {
                 ),
               ),
               SizedBox(height: 20.adaptSize),
-              Text("Shanti\nEngineering",
+              Text("Test",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 40.adaptSize,

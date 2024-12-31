@@ -19,7 +19,7 @@ class ProjectInventoryList extends GetView<ProjectDetailWrapperGetx> {
             height: 24.adaptSize,
           ),
           const Text(
-            "Design Estimate & Construction of residential building at anamnagar, kathmandu.",
+            "Design Estimate & Construction",
             style: TextStyle(
                 fontFamily: "Inter",
                 fontSize: 12,
