@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_test/Models/order_report_model.dart';
 import 'package:get_test/Screens/order_List/order_List_repo.dart';
@@ -37,7 +38,7 @@ class OrderReportController extends GetxController {
         hasMoreData.value = false;
       }
     } catch (e) {
-      print("Error fetching order report: $e");
+      debugPrint("Error fetching order report: $e");
     } finally {
       isLoading.value = false;
     }

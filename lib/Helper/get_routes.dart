@@ -17,6 +17,7 @@ import '../Screens/homepage/managerpages/createproject/create_project_page.dart'
 import '../Screens/homepage/managerpages/manager_profile.dart';
 import '../Screens/login/login_screeb_admin.dart';
 import '../Screens/login/login_screen.dart';
+import '../Screens/on_boarding/on_boarding_screen.dart';
 import '../Screens/project_homepage/create_project_local/create_project_local_page.dart';
 import '../Screens/project_homepage/search_project/search_project_page.dart';
 
@@ -43,6 +44,7 @@ class Routes {
   static const String getProjectHomepageAdmin = '/getProjectHomepageAdmin';
   static const String createProjectLocal = '/createProjectLocal';
   static const String projectSearchPage = '/projectSearchPage';
+  static const String onBoardingPage = '/onBoardingPage';
 
   static final routes = [
     GetPage(name: signin, page: () => const LoginScreen()),
@@ -65,5 +67,6 @@ class Routes {
     GetPage(name: getProjectHomepageAdmin, page: () =>  const ProjectHomepageAdmin()),
     GetPage(name: createProjectLocal, page: () =>  const CreateProjectLocalPage()),
     GetPage(name: projectSearchPage, page: () =>  const ProjectSearchPage()),
+    GetPage(name: onBoardingPage, page: () =>  const OnBoardingScreen()),
   ];
 }

@@ -8,6 +8,7 @@ import 'package:get_test/Screens/homepage/managerpages/projectpages/manager_page
 import 'package:get_test/Screens/homepage/managerpages/projectpages/projectdetails/project_detail_wrapper_getx.dart';
 import 'package:get_test/Screens/homepage/managerpages/reports/create_report_getx.dart';
 import 'package:get_test/Screens/login/login_getx.dart';
+import 'package:get_test/Screens/on_boarding/on_boarding_getX.dart';
 import 'package:get_test/Screens/order_List/order_List_getX.dart';
 import 'package:get_test/Screens/project_homepage/project_homepage_controller.dart';
 import '../../Screens/client/clienthome/client_home_getx.dart';
@@ -40,5 +41,6 @@ class AppBindings implements Bindings {
     Get.lazyPut<ProjectHomepageWrapperGetX>(() => ProjectHomepageWrapperGetX(), fenix: true);
     Get.lazyPut<CreateProjectLocalGetX>(() => CreateProjectLocalGetX(), fenix: true);
     Get.lazyPut<ProjectSearchController>(() => ProjectSearchController(), fenix: true);
+    Get.lazyPut<OnBoardingController>(() => OnBoardingController(), fenix: true);
   }
 }
