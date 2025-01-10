@@ -13,6 +13,8 @@ import 'package:get_test/Screens/project_homepage/project_homepage.dart';
 import '../Screens/client/clienthome/client_home.dart';
 import '../Screens/client/clienthome/client_profile.dart';
 import '../Screens/create_customer/create_customer_page.dart';
+import '../Screens/create_event/create_event_page.dart';
+import '../Screens/events/events_screen.dart';
 import '../Screens/homepage/managerpages/createproject/create_project_page.dart';
 import '../Screens/homepage/managerpages/manager_profile.dart';
 import '../Screens/login/login_screeb_admin.dart';
@@ -45,6 +47,8 @@ class Routes {
   static const String createProjectLocal = '/createProjectLocal';
   static const String projectSearchPage = '/projectSearchPage';
   static const String onBoardingPage = '/onBoardingPage';
+  static const String eventPage = '/eventPage';
+  static const String createEventPage = '/createEventPage';
 
   static final routes = [
     GetPage(name: signin, page: () => const LoginScreen()),
@@ -68,5 +72,7 @@ class Routes {
     GetPage(name: createProjectLocal, page: () =>  const CreateProjectLocalPage()),
     GetPage(name: projectSearchPage, page: () =>  const ProjectSearchPage()),
     GetPage(name: onBoardingPage, page: () =>  const OnBoardingScreen()),
+    GetPage(name: eventPage, page: () =>  const GetEventsPage()),
+    GetPage(name: createEventPage, page: () =>  const CreateEventPage()),
   ];
 }

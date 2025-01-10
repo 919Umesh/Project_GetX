@@ -12,4 +12,6 @@ class GetCustomerRepository extends BaseRepository {
     return UserResponseModel.fromJson(response.data);
   }
 }
+
+
 GetCustomerRepository getCustomerRepository = GetCustomerRepository();

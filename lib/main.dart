@@ -15,15 +15,14 @@ void main() async {
 class GetTest extends StatelessWidget {
   const GetTest({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Get Test',
+      title: 'Project GetX',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       initialBinding: AppBindings(),
-      initialRoute: Routes.getProjectHomepageAdmin,
+      initialRoute: Routes.eventPage,
       getPages: Routes.routes,
     );
   }

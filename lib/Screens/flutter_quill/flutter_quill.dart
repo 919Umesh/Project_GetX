@@ -11,7 +11,7 @@ class SampleEditor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Quill'),
+        title: const Text('Flutter Quill Flutter'),
       ),
       body: Column(
         children: [
