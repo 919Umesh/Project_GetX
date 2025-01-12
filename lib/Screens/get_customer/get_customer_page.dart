@@ -15,7 +15,7 @@ class GetCustomerPage extends GetView<GetCustomerController> {
         elevation: 0,
         backgroundColor: Colors.white,
         title: const Text(
-          'Customer',
+          'Customer List',
           style: TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.bold,
