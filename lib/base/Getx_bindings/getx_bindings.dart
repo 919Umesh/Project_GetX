@@ -45,6 +45,8 @@ class AppBindings implements Bindings {
     Get.lazyPut<ProjectSearchController>(() => ProjectSearchController(), fenix: true);
     Get.lazyPut<OnBoardingController>(() => OnBoardingController(), fenix: true);
     Get.lazyPut<GetEventsController>(() => GetEventsController(), fenix: true);
+
+
     Get.lazyPut<CreateEventController>(() => CreateEventController(), fenix: true);
   }
 }
