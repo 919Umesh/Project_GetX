@@ -13,5 +13,4 @@ class GetCustomerRepository extends BaseRepository {
   }
 }
 
-
 GetCustomerRepository getCustomerRepository = GetCustomerRepository();
