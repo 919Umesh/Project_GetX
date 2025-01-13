@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_test/Screens/get_customer/get_customer_getX.dart';
-import '../../Helper/constants.dart';
 
 class GetCustomerPage extends GetView<GetCustomerController> {
   const GetCustomerPage({super.key});
