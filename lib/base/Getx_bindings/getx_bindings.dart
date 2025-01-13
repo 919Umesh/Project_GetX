@@ -31,11 +31,9 @@ class AppBindings implements Bindings {
     Get.lazyPut<ManagerPagesGetx>(() => ManagerPagesGetx(), fenix: true);
     Get.lazyPut<CreateClientGetx>(() => CreateClientGetx(), fenix: true);
     Get.lazyPut<CreateProjectGetx>(() => CreateProjectGetx(), fenix: true);
-    Get.lazyPut<ProjectDetailWrapperGetx>(() => ProjectDetailWrapperGetx(),
-        fenix: true);
+    Get.lazyPut<ProjectDetailWrapperGetx>(() => ProjectDetailWrapperGetx(), fenix: true);
     Get.lazyPut<CreateReportGetx>(() => CreateReportGetx(), fenix: true);
-    Get.lazyPut<CreateInventorytGetx>(() => CreateInventorytGetx(),
-        fenix: true);
+    Get.lazyPut<CreateInventorytGetx>(() => CreateInventorytGetx(), fenix: true);
     Get.lazyPut<ClientHomeGetx>(() => ClientHomeGetx(), fenix: true);
     Get.lazyPut<CreateCustomerController>(() => CreateCustomerController(), fenix: true);
     Get.lazyPut<GetCustomerController>(() => GetCustomerController(), fenix: true);
@@ -45,8 +43,6 @@ class AppBindings implements Bindings {
     Get.lazyPut<ProjectSearchController>(() => ProjectSearchController(), fenix: true);
     Get.lazyPut<OnBoardingController>(() => OnBoardingController(), fenix: true);
     Get.lazyPut<GetEventsController>(() => GetEventsController(), fenix: true);
-
-
     Get.lazyPut<CreateEventController>(() => CreateEventController(), fenix: true);
   }
 }

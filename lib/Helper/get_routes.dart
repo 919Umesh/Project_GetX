@@ -10,6 +10,7 @@ import 'package:get_test/Screens/homepage/managerpages/projectpages/projectdetai
 import 'package:get_test/Screens/homepage/managerpages/reports/create_report_page.dart';
 import 'package:get_test/Screens/order_List/order_List_Screen.dart';
 import 'package:get_test/Screens/project_homepage/project_homepage.dart';
+import '../Screens/chat/chat_screen.dart';
 import '../Screens/client/clienthome/client_home.dart';
 import '../Screens/client/clienthome/client_profile.dart';
 import '../Screens/create_customer/create_customer_page.dart';
@@ -49,6 +50,7 @@ class Routes {
   static const String onBoardingPage = '/onBoardingPage';
   static const String eventPage = '/eventPage';
   static const String createEventPage = '/createEventPage';
+  static const String chatScreen = '/chatScreen';
 
   static final routes = [
     GetPage(name: signin, page: () => const LoginScreen()),
@@ -74,5 +76,6 @@ class Routes {
     GetPage(name: onBoardingPage, page: () =>  const OnBoardingScreen()),
     GetPage(name: eventPage, page: () =>  const GetEventsPage()),
     GetPage(name: createEventPage, page: () =>  const CreateEventPage()),
+    GetPage(name: chatScreen, page: () =>  const ChatScreen()),
   ];
 }
