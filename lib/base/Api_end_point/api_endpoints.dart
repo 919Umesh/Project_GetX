@@ -20,5 +20,5 @@ class ApiEndpoint {
   static const String getProjectList= '/project/get/';
   static const String createProjectLocal= '/project/create/';
   static const String projectSearchLocal= '/project/search/';
-  static const String createProductLocal= '/product/create/';
+  static const String createProductLocal= '/product/create';
 }
