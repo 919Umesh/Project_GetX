@@ -119,7 +119,7 @@ class BaseRepository {
       }
     }
     debugPrint('--------------Server---------');
-    debugPrint(url);
+    debugPrint(ApiEndpoint.baseUrl+url);
     debugPrint(baseFormData.fields.toString());
     Response? result;
     try {

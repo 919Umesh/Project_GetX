@@ -30,7 +30,7 @@ dependencies:
   firebase_core: ^2.25.5
   toggle_switch: ^2.1.0
   dotted_border: ^2.1.0
-  image_picker: ^1.0.7
+  image_picker: ^1.1.2
   search_page: ^2.3.0
   card_swiper: ^3.0.1
   intl: ^0.19.0

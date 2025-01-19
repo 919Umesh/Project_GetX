@@ -51,6 +51,7 @@ class Routes {
   static const String eventPage = '/eventPage';
   static const String createEventPage = '/createEventPage';
   static const String chatScreen = '/chatScreen';
+  static const String createProductLocal = '/createProductLocal';
 
   static final routes = [
     GetPage(name: signin, page: () => const LoginScreen()),
@@ -66,7 +67,6 @@ class Routes {
     GetPage(name: clientProfile, page: () => const ClientProfile()),
     GetPage(name: createClient, page: () => const CreateClientPage()),
     GetPage(name: orderReport, page: () => const OrderListScreen()),
-    GetPage(name: createProduct, page: () =>  const CreateProductPage()),
     GetPage(name: createCustomer, page: () =>   const CreateCustomerPage()),
     GetPage(name: getCustomer, page: () =>  const GetCustomerPage()),
     GetPage(name: getQuill, page: () =>  SampleEditor()),
@@ -77,5 +77,6 @@ class Routes {
     GetPage(name: eventPage, page: () =>  const GetEventsPage()),
     GetPage(name: createEventPage, page: () =>  const CreateEventPage()),
     GetPage(name: chatScreen, page: () =>  const ChatScreen()),
+    GetPage(name: createProductLocal, page: () =>  const CreateProductPage()),
   ];
 }

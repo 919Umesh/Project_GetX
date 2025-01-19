@@ -1,15 +1,10 @@
+// lib/features/product/presentation/create_product_page.dart
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:get_test/Helper/constants.dart';
-import 'package:get_test/Screens/create_product/create_product_getX.dart';
-import 'package:get_test/Screens/create_product/create_product_repo.dart';
-import 'package:get_test/utils/figmaUtils/design_utils.dart';
-import 'package:dio/dio.dart' as d;
-import '../reusable/icon_button_b.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'create_product_getX.dart';
 
 class CreateProductPage extends GetView<CreateProductController> {
   const CreateProductPage({super.key});
@@ -18,111 +13,156 @@ class CreateProductPage extends GetView<CreateProductController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
         title: const Text('Create Product'),
+        backgroundColor: Colors.blueAccent,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            FormBuilder(
-              key: controller.formKeyProduct,
-              child: Expanded(
-                child: ListView(
-                  children: [
-                    buildTextField('GroupName', 'GroupName'),
-                    buildTextField('DbName', 'DbName'),
-                    buildTextField('SubGroupName', 'SubGroupName'),
-                    buildTextField('ProductUnit', 'ProductUnit'),
-                    buildTextField('ProductAltUnit', 'ProductAltUnit',isOptional: true),
-                    buildTextField('SalesRate', 'SalesRate', isNumeric: true),
-                    buildTextField('PurchaseRate', 'PurchaseRate', isNumeric: true),
-                    buildTextField('ProductCode', 'ProductCode',isOptional: true),
-                    buildTextField('ProductName', 'ProductName'),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.maxFinite,
-              height: 55.adaptSize,
-              child: Obx(() => CustomIconButtonB(
-                onPressed:_saveForm,
-                text: controller.isLoading.value ? 'Saving...' : 'Save Product',
-              )),
-            ),
-            const SizedBox(height: 20),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              _buildProductForm(context),
+              const SizedBox(height: 20),
+              _buildSaveButton(),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget buildTextField(String name, String label, {bool isNumeric = false, bool isOptional = false}) {
+  FormBuilder _buildProductForm(BuildContext context) {
+    return FormBuilder(
+      key: controller.formKeyProduct,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildTextField(
+            label: 'Product Name',
+            name: 'name',
+            validator: (value) => value == null || value.isEmpty
+                ? 'Please enter a valid name.'
+                : null,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            label: 'Sales Rate',
+            name: 'salesRate',
+            validator: (value) =>
+            value == null || double.tryParse(value) == null
+                ? 'Enter a valid rate.'
+                : null,
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            label: 'Purchase Rate',
+            name: 'purchaseRate',
+            validator: (value) =>
+            value == null || double.tryParse(value) == null
+                ? 'Enter a valid rate.'
+                : null,
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            label: 'Quantity',
+            name: 'quantity',
+            validator: (value) => value == null || int.tryParse(value) == null
+                ? 'Enter a valid quantity.'
+                : null,
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            label: 'Unit',
+            name: 'unit',
+            validator: (value) =>
+            value == null || value.isEmpty ? 'Enter a valid unit.' : null,
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            label: 'Duration',
+            name: 'duration',
+            validator: (value) => value == null || value.isEmpty
+                ? 'Enter a valid duration.'
+                : null,
+          ),
+          const SizedBox(height: 20),
+          FormBuilderDateTimePicker(
+            name: 'fromDate',
+            initialValue: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+            inputType: InputType.date,
+            validator: (value) =>
+            value == null ? 'Select a valid start date.' : null,
+            decoration: InputDecoration(
+              labelText: 'From Date',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          FormBuilderDateTimePicker(
+            name: 'toDate',
+            initialValue: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+            inputType: InputType.date,
+            validator: (value) =>
+            value == null ? 'Select a valid end date.' : null,
+            decoration: InputDecoration(
+              labelText: 'To Date',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
+  Widget _buildTextField({
+    required String label,
+    required String name,
+    required String? Function(String?)? validator,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10),
-        Text(
-          '$label *',
-          style: Get.textTheme.titleSmall,
-        ),
+        Text(label),
         const SizedBox(height: 10),
         FormBuilderTextField(
           name: name,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) {
-            if (!isOptional&&(value == null || value.trim().isEmpty)) {
-              return 'Please enter a valid $label.';
-            }
-            return null;
-          },
+          validator: validator,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6.0),
             ),
           ),
-          keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
         ),
       ],
     );
   }
-  _saveForm() async {
-    try {
-      d.Response response = await createProductRepository.createProduct(
-          formData: d.FormData.fromMap(controller.formKeyProduct.currentState!.value));
-      debugPrint(response.statusMessage);
-      debugPrint(response.data.toString());
-      if (response.statusCode == 201 || response.statusCode == 200) {
-        Get.back();
-      } else {
-        Get.snackbar(
-          "Error",
-          "Failed to save product.",
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.redAccent,
-          colorText: Colors.white,
-          margin: const EdgeInsets.all(10),
-          borderRadius: 10,
-        );
-      }
-    } catch (e) {
-     debugPrint(e.toString());
-     Get.snackbar(
-       "Error",
-       "An error occurred. Please try again.",
-       snackPosition: SnackPosition.TOP,
-       backgroundColor: Colors.redAccent,
-       colorText: Colors.white,
-       margin: const EdgeInsets.all(10),
-       borderRadius: 10,
-     );
-    }
-    finally{
-      controller.isLoading.value =false;
-    }
+
+  Widget _buildSaveButton() {
+    return SizedBox(
+      width: double.infinity,
+      height: 55,
+      child: ElevatedButton(
+        onPressed: () => controller.saveProduct(),
+        child: const Text('Save Product'),
+      ),
+    );
   }
 }

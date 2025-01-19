@@ -14,6 +14,7 @@ import 'package:get_test/Screens/project_homepage/project_homepage_controller.da
 import '../../Screens/client/clienthome/client_home_getx.dart';
 import '../../Screens/client/clientprofile/create_client_getx.dart';
 import '../../Screens/create_event/create_event_getX.dart';
+import '../../Screens/create_product/create_product_repo.dart';
 import '../../Screens/events/events_getX.dart';
 import '../../Screens/homepage/managerpages/createproject/create_project_getx.dart';
 import '../../Screens/project_homepage/create_project_local/create_project_local_getX.dart';
@@ -27,7 +28,6 @@ class AppBindings implements Bindings {
         fenix: true);
     Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
     Get.lazyPut<OrderReportController>(() => OrderReportController(), fenix: true);
-    Get.lazyPut<CreateProductController>(() => CreateProductController(), fenix: true);
     Get.lazyPut<ManagerPagesGetx>(() => ManagerPagesGetx(), fenix: true);
     Get.lazyPut<CreateClientGetx>(() => CreateClientGetx(), fenix: true);
     Get.lazyPut<CreateProjectGetx>(() => CreateProjectGetx(), fenix: true);
@@ -44,5 +44,6 @@ class AppBindings implements Bindings {
     Get.lazyPut<OnBoardingController>(() => OnBoardingController(), fenix: true);
     Get.lazyPut<GetEventsController>(() => GetEventsController(), fenix: true);
     Get.lazyPut<CreateEventController>(() => CreateEventController(), fenix: true);
+    Get.lazyPut<CreateProductController>(() => CreateProductController(), fenix: true);
   }
 }
