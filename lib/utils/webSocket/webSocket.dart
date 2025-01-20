@@ -5,13 +5,15 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class WebSocketService {
   IO.Socket? socket;
 
-  void connect() {
+  void connect(String userId) {
     socket = IO.io('http://192.168.1.64:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': true,
+      'query': {'userId': userId},
     });
 
     socket?.on('connect', (_) {
+      debugPrint('Connected to server as user: $userId');
       debugPrint('Connected to server');
       Fluttertoast.showToast(msg: 'Connected to server');
     });
@@ -27,9 +29,13 @@ class WebSocketService {
     });
   }
 
-  void sendMessage(String message) {
+  void sendMessage(String senderId,String receiverId,String message) {
     if (socket != null && socket?.connected == true) {
-      socket?.emit('chatMessage', message);
+      socket?.emit('chatMessage', {
+        'senderId': senderId,
+        'receiverId': receiverId,
+        'message': message,
+      });
       Fluttertoast.showToast(msg: "Message sent: $message");
     } else {
       Fluttertoast.showToast(msg: 'Unable to send message, not connected');
