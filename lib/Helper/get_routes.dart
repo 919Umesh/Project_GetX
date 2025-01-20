@@ -16,6 +16,7 @@ import '../Screens/client/clienthome/client_profile.dart';
 import '../Screens/create_customer/create_customer_page.dart';
 import '../Screens/create_event/create_event_page.dart';
 import '../Screens/events/events_screen.dart';
+import '../Screens/get_product/get_product_page.dart';
 import '../Screens/homepage/managerpages/createproject/create_project_page.dart';
 import '../Screens/homepage/managerpages/manager_profile.dart';
 import '../Screens/login/login_screeb_admin.dart';
@@ -52,6 +53,7 @@ class Routes {
   static const String createEventPage = '/createEventPage';
   static const String chatScreen = '/chatScreen';
   static const String createProductLocal = '/createProductLocal';
+  static const String getProductPage = '/getProductPage';
 
   static final routes = [
     GetPage(name: signin, page: () => const LoginScreen()),
@@ -78,5 +80,6 @@ class Routes {
     GetPage(name: createEventPage, page: () =>  const CreateEventPage()),
     GetPage(name: chatScreen, page: () =>  const ChatScreen()),
     GetPage(name: createProductLocal, page: () =>  const CreateProductPage()),
+    GetPage(name: getProductPage, page: () =>  const GetProductPage()),
   ];
 }

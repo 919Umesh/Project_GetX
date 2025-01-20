@@ -32,7 +32,6 @@ class CreateProductController extends GetxController {
               DateFormat('yyyy-MM-dd').format(formValues['toDate']);
         }
 
-
         if (selectedImage.value != null) {
           final file = File(selectedImage.value!.path);
           formValues['productImage'] = d.MultipartFile.fromFileSync(
@@ -42,7 +41,6 @@ class CreateProductController extends GetxController {
         } else {
           debugPrint("No image selected");
         }
-
         debugPrint("Form Values:");
         formValues.forEach((key, value) {
           if (value is d.MultipartFile) {
@@ -51,13 +49,8 @@ class CreateProductController extends GetxController {
             debugPrint('$key: $value');
           }
         });
-
-
         final d.FormData formData = d.FormData.fromMap(formValues);
-
-
         final response = await createProductRepository.createProduct(formData: formData);
-
         if (response.statusCode == 201 || response.statusCode == 200) {
           Get.back();
           _showSuccessMessage('Product created successfully');

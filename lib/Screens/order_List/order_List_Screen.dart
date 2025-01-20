@@ -11,9 +11,7 @@ class OrderListScreen extends GetView<OrderReportController> {
     final ScrollController scrollController = ScrollController();
 
     scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent &&
-          controller.hasMoreData.value) {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && controller.hasMoreData.value) {
         controller.loadMoreOrders();
       }
     });

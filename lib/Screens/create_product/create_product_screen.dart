@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../Helper/get_routes.dart';
 import 'create_product_getX.dart';
 
 class CreateProductPage extends GetView<CreateProductController> {
@@ -56,6 +57,12 @@ class CreateProductPage extends GetView<CreateProductController> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Get.toNamed(Routes.getProductPage);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
