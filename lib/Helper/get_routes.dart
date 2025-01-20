@@ -21,6 +21,7 @@ import '../Screens/homepage/managerpages/createproject/create_project_page.dart'
 import '../Screens/homepage/managerpages/manager_profile.dart';
 import '../Screens/login/login_screeb_admin.dart';
 import '../Screens/login/login_screen.dart';
+import '../Screens/loginLocal/login_screen.dart';
 import '../Screens/on_boarding/on_boarding_screen.dart';
 import '../Screens/project_homepage/create_project_local/create_project_local_page.dart';
 import '../Screens/project_homepage/search_project/search_project_page.dart';
@@ -54,6 +55,7 @@ class Routes {
   static const String chatScreen = '/chatScreen';
   static const String createProductLocal = '/createProductLocal';
   static const String getProductPage = '/getProductPage';
+  static const String loginLocal = '/loginLocal';
 
   static final routes = [
     GetPage(name: signin, page: () => const LoginScreen()),
@@ -81,5 +83,6 @@ class Routes {
     GetPage(name: chatScreen, page: () =>  const ChatScreen()),
     GetPage(name: createProductLocal, page: () =>  const CreateProductPage()),
     GetPage(name: getProductPage, page: () =>  const GetProductPage()),
+    GetPage(name: loginLocal, page: () =>  const LoginLocalPage()),
   ];
 }

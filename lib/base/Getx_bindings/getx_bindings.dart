@@ -18,6 +18,7 @@ import '../../Screens/create_product/create_product_repo.dart';
 import '../../Screens/events/events_getX.dart';
 import '../../Screens/get_product/get_product_getx.dart';
 import '../../Screens/homepage/managerpages/createproject/create_project_getx.dart';
+import '../../Screens/loginLocal/login_getX.dart';
 import '../../Screens/project_homepage/create_project_local/create_project_local_getX.dart';
 import '../../Screens/project_homepage/project_homepage_pages/project_homepage_wrapper_getX.dart';
 import '../../Screens/project_homepage/search_project/search_project_getX.dart';
@@ -47,5 +48,6 @@ class AppBindings implements Bindings {
     Get.lazyPut<CreateEventController>(() => CreateEventController(), fenix: true);
     Get.lazyPut<CreateProductController>(() => CreateProductController(), fenix: true);
     Get.lazyPut<GetProductController>(() => GetProductController(), fenix: true);
+    Get.lazyPut<LoginLocalController>(() => LoginLocalController(), fenix: true);
   }
 }

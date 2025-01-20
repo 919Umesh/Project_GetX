@@ -3,6 +3,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_test/Screens/get_customer/get_customer_getX.dart';
 
+import '../../Helper/get_routes.dart';
+
 class GetCustomerPage extends GetView<GetCustomerController> {
   const GetCustomerPage({super.key});
 
@@ -42,7 +44,7 @@ class GetCustomerPage extends GetView<GetCustomerController> {
                 height: 1,
               ),
               itemBuilder: (context, index) {
-                final order = controller.userList[index];
+                final user = controller.userList[index];
                 return Card(
                   elevation: 4,
                   margin: const EdgeInsets.symmetric(vertical: 8),
@@ -62,14 +64,14 @@ class GetCustomerPage extends GetView<GetCustomerController> {
                       ),
                     ),
                     title: Text(
-                      order.name,
+                      user.name,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
                     subtitle: Text(
-                      order.email,
+                      user.email,
                       style: const TextStyle(
                         color: Colors.black54,
                       ),
@@ -79,11 +81,11 @@ class GetCustomerPage extends GetView<GetCustomerController> {
                       color: Colors.grey,
                     ),
                     onTap: () {
-                      // Haptic feedback could be added here
-                      Fluttertoast.showToast(
-                        msg: order.name,
-                        backgroundColor: Colors.black87,
-                        textColor: Colors.white,
+                      Get.toNamed(
+                        Routes.chatScreen,
+                        arguments: {
+                          'receiverID': user.id,
+                        },
                       );
                     },
                   ),

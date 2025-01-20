@@ -17,6 +17,15 @@ class SharedPreferencesHelper {
 
     return prefs.setBool(key!, value!);
   }
+  static Future<bool> saveStringLocal(String key, String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(key, value);
+  }
+  static Future<String> getStringLocal(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key) ?? ''; // Returns an empty string if not found
+  }
+
 
   static Future<bool> saveStringList(String key, List<String> value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

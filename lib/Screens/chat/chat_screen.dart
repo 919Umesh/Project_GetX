@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import '../../Helper/shared_preference_fun.dart';
 import '../../Models/chat_model.dart';
 import '../../utils/webSocket/webSocket.dart';
 import 'chat_getx.dart';
@@ -34,6 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
         v: 0,
       ));
       _scrollToBottom();
+      getUserID();
     });
   }
 
@@ -73,9 +76,21 @@ class _ChatScreenState extends State<ChatScreen> {
       _scrollToBottom();
     }
   }
+  Future<void> getUserID() async {
+    String userID = await SharedPreferencesHelper.getStringLocal('userID');
+    debugPrint('--------tes457457t----');
+    debugPrint(userID);
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the passed arguments
+    final arguments = Get.arguments;
+    final String receiverData = arguments['receiverID'];
+    // debugPrint('--------tes457457t----');
+    // debugPrint(receiverData);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
