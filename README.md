@@ -224,7 +224,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Support
 
-For support, email support@chateventsapp.com or create an issue in the repository.
+For support, email thakuriumesh919@gmail.com or create an issue in the repository.
 
 ## Acknowledgments
 
