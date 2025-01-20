@@ -15,24 +15,64 @@ class LoginLocalPage extends GetView<LoginLocalController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: AppColors.backgroundColor,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              _buildCustomerForm(context),
-              SizedBox(height: 20.adaptSize),
-              _buildSaveButton(),
-              const SizedBox(height: 20),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              AppColors.backgroundColor.withOpacity(0.9),
+              AppColors.backgroundColor,
             ],
           ),
         ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 40),
+                  _buildHeader(),
+                  const SizedBox(height: 40),
+                  _buildCustomerForm(context),
+                  SizedBox(height: 30.adaptSize),
+                  _buildSaveButton(),
+                  const SizedBox(height: 20),
+                  _buildForgotPassword(),
+                  const SizedBox(height: 40),
+                  _buildSocialLogin(),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Welcome Back!',
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Sign in to continue',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.blue,
+          ),
+        ),
+      ],
     );
   }
 
@@ -45,18 +85,23 @@ class LoginLocalPage extends GetView<LoginLocalController> {
         children: [
           _buildTextField(
             context,
-            label: 'email',
+            label: 'Email',
             name: 'email',
+            hintText: 'Enter your email',
+            prefixIcon: Icons.email_outlined,
             validator: (value) =>
-            value == null || value.isEmpty ? 'Please enter a valid name.' : null, hintText: 'Enter title',
+            value == null || value.isEmpty ? 'Please enter a valid email.' : null,
           ),
           SizedBox(height: 20.adaptSize),
           _buildTextField(
             context,
-            label: 'password',
+            label: 'Password',
             name: 'password',
+            hintText: 'Enter your password',
+            prefixIcon: Icons.lock_outline,
+            isPassword: true,
             validator: (value) =>
-            value == null || value.isEmpty ? 'Please enter a valid email.' : null, hintText: 'Enter description',
+            value == null || value.isEmpty ? 'Please enter your password.' : null,
           ),
         ],
       ),
@@ -69,42 +114,135 @@ class LoginLocalPage extends GetView<LoginLocalController> {
         required String name,
         required String hintText,
         required String? Function(String?)? validator,
+        IconData? prefixIcon,
+        bool isPassword = false,
       }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: context.textTheme.titleSmall,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Colors.blue,
+          ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
         FormBuilderTextField(
           name: name,
+          obscureText: isPassword,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
+          style: TextStyle(color: Colors.blue),
           decoration: InputDecoration(
             hintText: hintText,
+            hintStyle: TextStyle(color: Colors.blue),
+            prefixIcon: Icon(prefixIcon, color: Colors.blue),
             contentPadding: const EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 8,
+              vertical: 16.0,
+              horizontal: 16,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(6.0),
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(color: Colors.blue),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+            filled: true,
+            fillColor: Colors.white.withOpacity(0.1),
           ),
-          keyboardType: TextInputType.text,
+          keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
         ),
       ],
     );
   }
 
   Widget _buildSaveButton() {
-    return SizedBox(
+    return Container(
       width: double.maxFinite,
       height: 55.adaptSize,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade400, Colors.blue.shade600],
+        ),
+      ),
       child: CustomIconButtonB(
         onPressed: _saveForm,
-        text: 'Login',
+        text: 'Sign In',
+      ),
+    );
+  }
+
+  Widget _buildForgotPassword() {
+    return Center(
+      child: TextButton(
+        onPressed: () {
+          // Add forgot password functionality
+        },
+        child: Text(
+          'Forgot Password?',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSocialLogin() {
+    return Column(
+      children: [
+        const Row(
+          children: [
+            Expanded(child: Divider(color: Colors.blue)),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Continue with',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+            Expanded(child: Divider(color: Colors.blue)),
+          ],
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _socialButton(Icons.g_mobiledata, 'Google'),
+            const SizedBox(width: 20),
+            _socialButton(Icons.facebook, 'Facebook'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _socialButton(IconData icon, String platform) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.blue),
+          const SizedBox(width: 8),
+          Text(
+            platform,
+            style: TextStyle(color: Colors.blue),
+          ),
+        ],
       ),
     );
   }
@@ -112,7 +250,6 @@ class LoginLocalPage extends GetView<LoginLocalController> {
   Future<void> _saveForm() async {
     try {
       if (controller.formKeyLogin.currentState!.saveAndValidate()) {
-
         final formData = {
           'email': controller.formKeyLogin.currentState!.value['email'],
           'password': controller.formKeyLogin.currentState!.value['password'],
@@ -120,12 +257,11 @@ class LoginLocalPage extends GetView<LoginLocalController> {
         debugPrint('email: ${formData['email']}');
         debugPrint('password: ${formData['password']}');
         final response = await loginLocalRepository.userLogin(formData);
-
         if (response.statusCode == 200) {
           _showSuccessMessage(response.statusMessage.toString());
           await SharedPreferencesHelper.saveStringLocal('userID', response.data['user']['id']);
           String userID = await SharedPreferencesHelper.getStringLocal('userID');
-          print("Stored userID: $userID");
+          debugPrint("Stored userID: $userID");
           _resetForm();
           Get.toNamed(Routes.getCustomer);
         } else {
@@ -136,38 +272,41 @@ class LoginLocalPage extends GetView<LoginLocalController> {
       _showCatchMessage(e.toString());
     }
   }
+
   void _resetForm() {
     controller.formKeyLogin.currentState?.reset();
   }
+
   void _showSuccessMessage(String message) {
     Get.snackbar(
       "Success",
       message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.green,
-      colorText: Colors.white,
+      colorText: Colors.blue,
       duration: const Duration(seconds: 3),
     );
   }
+
   void _showErrorMessage(String message) {
     Get.snackbar(
       "Error",
       message,
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.red,
       colorText: Colors.white,
       duration: const Duration(seconds: 3),
     );
   }
+
   void _showCatchMessage(String e) {
     Get.snackbar(
       'Error',
       e,
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.red,
       colorText: Colors.white,
       duration: const Duration(seconds: 3),
     );
   }
 }
-

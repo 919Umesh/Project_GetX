@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import '../../Helper/shared_preference_fun.dart';
 import '../../Models/chat_model.dart';
 import '../../utils/webSocket/webSocket.dart';
 import 'chat_getx.dart';
@@ -14,8 +12,11 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  String userId = "user145423";
-  String receiverId = "user123";
+
+
+  late String userId;
+  late  String receiverId;
+  late  String username;
   final TextEditingController _controller = TextEditingController();
   final WebSocketService _webSocketService = WebSocketService();
   final GetChatController _chatController = Get.put(GetChatController());
@@ -24,7 +25,18 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+    final arguments = Get.arguments;
+    receiverId = arguments['receiverID'];
+    userId = arguments['senderID'];
+    username = arguments['username'];
+
     _webSocketService.connect(userId);
+    _chatController.initChat(userId, receiverId);
+    _chatController.fetchMessageHistory();
+
+    debugPrint('-----------yuy--------');
+    debugPrint(userId);
+    debugPrint(receiverId);
 
     _webSocketService.socket?.on('chatMessage', (data) {
       _chatController.messageList.add(MessageModel(
@@ -36,7 +48,6 @@ class _ChatScreenState extends State<ChatScreen> {
         v: 0,
       ));
       _scrollToBottom();
-      getUserID();
     });
   }
 
@@ -76,21 +87,10 @@ class _ChatScreenState extends State<ChatScreen> {
       _scrollToBottom();
     }
   }
-  Future<void> getUserID() async {
-    String userID = await SharedPreferencesHelper.getStringLocal('userID');
-    debugPrint('--------tes457457t----');
-    debugPrint(userID);
-  }
-
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve the passed arguments
-    final arguments = Get.arguments;
-    final String receiverData = arguments['receiverID'];
-    // debugPrint('--------tes457457t----');
-    // debugPrint(receiverData);
-
+    final GetChatController controller = Get.find<GetChatController>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -105,9 +105,9 @@ class _ChatScreenState extends State<ChatScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'User 123',
-                  style: TextStyle(
+                 Text(
+                  username,
+                  style: const TextStyle(
                     color: Colors.black87,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_test/Screens/get_customer/get_customer_getX.dart';
-
 import '../../Helper/get_routes.dart';
+import '../../Helper/shared_preference_fun.dart';
 
 class GetCustomerPage extends GetView<GetCustomerController> {
   const GetCustomerPage({super.key});
@@ -80,11 +79,14 @@ class GetCustomerPage extends GetView<GetCustomerController> {
                       Icons.chevron_right,
                       color: Colors.grey,
                     ),
-                    onTap: () {
+                    onTap: () async {
+                      String userId = await SharedPreferencesHelper.getStringLocal('userID');
                       Get.toNamed(
                         Routes.chatScreen,
                         arguments: {
+                          'senderID':userId,
                           'receiverID': user.id,
+                          'username': user.name,
                         },
                       );
                     },
