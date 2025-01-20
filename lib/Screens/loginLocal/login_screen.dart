@@ -53,7 +53,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
   }
 
   Widget _buildHeader() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -64,7 +64,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
             color: Colors.blue,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           'Sign in to continue',
           style: TextStyle(
