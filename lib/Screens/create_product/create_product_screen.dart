@@ -62,7 +62,7 @@ class CreateProductPage extends GetView<CreateProductController> {
         onPressed: (){
           Get.toNamed(Routes.getProductPage);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

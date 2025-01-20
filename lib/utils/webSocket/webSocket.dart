@@ -5,9 +5,8 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class WebSocketService {
   IO.Socket? socket;
 
-  // Connect to the WebSocket server
   void connect() {
-    socket = IO.io('http://192.168.1.67:3000', <String, dynamic>{
+    socket = IO.io('http://192.168.1.64:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': true,
     });
@@ -28,7 +27,6 @@ class WebSocketService {
     });
   }
 
-  // Send message to the server
   void sendMessage(String message) {
     if (socket != null && socket?.connected == true) {
       socket?.emit('chatMessage', message);
@@ -38,7 +36,6 @@ class WebSocketService {
     }
   }
 
-  // Disconnect from the WebSocket server
   void disconnect() {
     socket?.disconnect();
     Fluttertoast.showToast(msg: 'Disconnected from WebSocket');
