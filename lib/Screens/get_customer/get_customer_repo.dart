@@ -6,7 +6,7 @@ class GetCustomerRepository extends BaseRepository {
   Future<UserResponseModel> getCustomer() async {
     final response =  await getDataFromServer(
       ApiEndpoint.getCustomer,
-      needsAuthorization: false,
+      needsAuthorization: true,
       params: {},
     );
     return UserResponseModel.fromJson(response.data);

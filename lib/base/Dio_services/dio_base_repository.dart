@@ -151,10 +151,9 @@ class BaseRepository {
       String? changedBaseUrl,
       required Map<String, dynamic> params}) async {
     if (needsAuthorization) {
-      String token = //415fdbfb7fd17c1f943919f72457e6b4a463bee8";
-          await SharedPreferencesHelper.getString(key: SharedPreferenceKey.token);
+      String token = await SharedPreferencesHelper.getStringLocal('Token');
       if (token.isNotEmpty) {
-        dio!.options.headers["Authorization"] = "Token $token";
+        dio!.options.headers["Authorization"] = "Bearer $token";
       }
     }
     if (changeBaseUrl) {

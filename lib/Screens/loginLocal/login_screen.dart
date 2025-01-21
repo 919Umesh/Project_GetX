@@ -259,6 +259,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
         final response = await loginLocalRepository.userLogin(formData);
         if (response.statusCode == 200) {
           _showSuccessMessage(response.statusMessage.toString());
+          await SharedPreferencesHelper.saveStringLocal('Token', response.data['token']);
           await SharedPreferencesHelper.saveStringLocal('userID', response.data['user']['id']);
           String userID = await SharedPreferencesHelper.getStringLocal('userID');
           debugPrint("Stored userID: $userID");
