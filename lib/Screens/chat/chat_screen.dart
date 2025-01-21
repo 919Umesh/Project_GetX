@@ -34,10 +34,6 @@ class _ChatScreenState extends State<ChatScreen> {
     _chatController.initChat(userId, receiverId);
     _chatController.fetchMessageHistory();
 
-    debugPrint('-----------yuy--------');
-    debugPrint(userId);
-    debugPrint(receiverId);
-
     _webSocketService.socket?.on('chatMessage', (data) {
       _chatController.messageList.add(MessageModel(
         id: DateTime.now().toString(),
@@ -73,7 +69,6 @@ class _ChatScreenState extends State<ChatScreen> {
       String message = _controller.text;
       _webSocketService.sendMessage(userId, receiverId, message);
 
-      // Add message to local list
       _chatController.messageList.add(MessageModel(
         id: DateTime.now().toString(),
         sender: userId,

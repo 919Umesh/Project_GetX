@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../Models/chat_model.dart';
 import 'chat_repo.dart';
@@ -28,11 +27,6 @@ class GetChatController extends GetxController {
     isLoading.value = true;
     try {
       final model = await getChatRepository.getMessages(senderId,receiverId);
-      debugPrint('----------dghgfh');
-      debugPrint(senderId);
-      debugPrint(receiverId);
-
-      Fluttertoast.showToast(msg: senderId);
       if ( model.status == 200) {
         messageList.value = model.messages;
       } else {
