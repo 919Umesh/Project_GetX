@@ -157,6 +157,7 @@ class BaseRepository {
       String token = await SharedPreferencesHelper.getStringLocal('Token');
       if (token.isNotEmpty) {
         if (JwtDecoder.isExpired(token)) {
+          await SharedPreferencesHelper.removeKeyLocal('Token');
           Get.offAllNamed(Routes.loginLocal);
         } else {
           dio!.options.headers["Authorization"] = "Bearer $token";

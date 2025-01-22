@@ -26,6 +26,10 @@ class SharedPreferencesHelper {
     return prefs.getString(key) ?? ''; // Returns an empty string if not found
   }
 
+  static Future<bool> removeKeyLocal(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.remove(key); // Removes the value for the specified key
+  }
 
   static Future<bool> saveStringList(String key, List<String> value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
