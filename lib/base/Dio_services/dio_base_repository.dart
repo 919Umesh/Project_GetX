@@ -7,8 +7,11 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as g;
+import 'package:get/get_core/src/get_main.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../Helper/constants.dart';
+import '../../Helper/get_routes.dart';
 import '../../Helper/shared_preference_fun.dart';
 import '../Api_end_point/api_endpoints.dart';
 import 'dio_failure.dart';
@@ -153,7 +156,11 @@ class BaseRepository {
     if (needsAuthorization) {
       String token = await SharedPreferencesHelper.getStringLocal('Token');
       if (token.isNotEmpty) {
-        dio!.options.headers["Authorization"] = "Bearer $token";
+        if (JwtDecoder.isExpired(token)) {
+          Get.offAllNamed(Routes.loginLocal);
+        } else {
+          dio!.options.headers["Authorization"] = "Bearer $token";
+        }
       }
     }
     if (changeBaseUrl) {
