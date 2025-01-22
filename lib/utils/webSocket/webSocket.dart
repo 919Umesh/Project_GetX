@@ -1,10 +1,16 @@
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class WebSocketService {
   IO.Socket? socket;
+  RTCPeerConnection? peerConnection;
+  MediaStream? localStream;
+  String? remoteUserId;
 
+  /// Connect to the WebSocket server with the given userId
   void connect(String userId) {
     socket = IO.io('http://192.168.1.64:3000', <String, dynamic>{
       'transports': ['websocket'],
@@ -14,22 +20,111 @@ class WebSocketService {
 
     socket?.on('connect', (_) {
       debugPrint('Connected to server as user: $userId');
-      debugPrint('Connected to server');
       Fluttertoast.showToast(msg: 'Connected to server');
     });
 
-    socket?.on('chatMessage', (data) {
-      debugPrint('Message received: $data');
-      Fluttertoast.showToast(msg: "$data");
-    });
+    _setupWebRTCListeners();
 
     socket?.on('disconnect', (_) {
       debugPrint('Disconnected from server');
-      Fluttertoast.showToast(msg: 'Disconnected from server',gravity: ToastGravity.BOTTOM);
+      Fluttertoast.showToast(msg: 'Disconnected from server');
     });
   }
 
-  void sendMessage(String senderId,String receiverId,String message) {
+  /// Setup WebRTC signaling listeners
+  void _setupWebRTCListeners() {
+    socket?.on('offer', (data) async {
+      debugPrint('Offer received: $data');
+      remoteUserId = data['senderId'];
+
+      var offer = RTCSessionDescription(data['offer']['sdp'], data['offer']['type']);
+      await _createPeerConnection();
+      await peerConnection?.setRemoteDescription(offer);
+
+      var answer = await peerConnection?.createAnswer();
+      await peerConnection?.setLocalDescription(answer!);
+
+      socket?.emit('answer', {
+        'senderId': socket?.id,
+        'receiverId': remoteUserId,
+        'answer': {'sdp': answer?.sdp, 'type': answer?.type},
+      });
+    });
+
+    socket?.on('answer', (data) async {
+      debugPrint('Answer received: $data');
+      var answer = RTCSessionDescription(data['answer']['sdp'], data['answer']['type']);
+      await peerConnection?.setRemoteDescription(answer);
+    });
+
+    socket?.on('ice-candidate', (data) async {
+      debugPrint('ICE candidate received: $data');
+      var candidate = RTCIceCandidate(
+        data['candidate']['candidate'],
+        data['candidate']['sdpMid'],
+        data['candidate']['sdpMLineIndex'],
+      );
+      await peerConnection?.addCandidate(candidate);
+    });
+  }
+
+  /// Create a WebRTC peer connection
+  Future<void> _createPeerConnection() async {
+    if (peerConnection != null) return;
+
+    final configuration = {
+      'iceServers': [
+        {'urls': 'stun:stun.l.google.com:19302'},
+      ],
+    };
+
+    peerConnection = await createPeerConnection(configuration);
+
+    localStream = await navigator.mediaDevices.getUserMedia({'audio': true});
+
+    for (var track in localStream!.getTracks()) {
+      await peerConnection?.addTrack(track, localStream!);
+    }
+
+    // Handle ICE candidates
+    peerConnection?.onIceCandidate = (candidate) {
+      if (candidate != null) {
+        socket?.emit('ice-candidate', {
+          'senderId': socket?.id,
+          'receiverId': remoteUserId,
+          'candidate': {
+            'candidate': candidate.candidate,
+            'sdpMid': candidate.sdpMid,
+            'sdpMLineIndex': candidate.sdpMLineIndex,
+          },
+        });
+      }
+    };
+
+    // Handle incoming remote tracks
+    peerConnection?.onTrack = (RTCTrackEvent event) {
+      debugPrint('Remote track added');
+      // Handle remote track (e.g., play remote audio)
+    };
+  }
+
+  /// Start a call with the given receiverId
+  void startCall(String receiverId) async {
+    remoteUserId = receiverId;
+    await _createPeerConnection();
+
+    var offer = await peerConnection?.createOffer();
+    await peerConnection?.setLocalDescription(offer!);
+
+    socket?.emit('offer', {
+      'senderId': socket?.id,
+      'receiverId': receiverId,
+      'offer': {'sdp': offer?.sdp, 'type': offer?.type},
+    });
+  }
+
+  /// Send a chat message to the receiver
+  void sendMessage(String senderId, String receiverId, String message) {
     if (socket != null && socket?.connected == true) {
       socket?.emit('chatMessage', {
         'senderId': senderId,
@@ -43,7 +138,11 @@ class WebSocketService {
   }
 
   void disconnect() {
+    localStream?.dispose();
+    peerConnection?.close();
+    peerConnection = null;
     socket?.disconnect();
     Fluttertoast.showToast(msg: 'Disconnected from WebSocket');
   }
 }
+

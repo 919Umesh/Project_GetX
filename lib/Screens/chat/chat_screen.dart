@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../Models/chat_model.dart';
 import '../../utils/webSocket/webSocket.dart';
+import 'audio_call.dart';
 import 'chat_getx.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -82,6 +84,26 @@ class _ChatScreenState extends State<ChatScreen> {
       _scrollToBottom();
     }
   }
+  void _startCall() {
+    _webSocketService.startCall(receiverId);
+    Fluttertoast.showToast(msg: 'Starting call...');
+
+    Get.to(() => AudioCallScreen(
+      username: username,
+      isMuted: false,
+      onEndCall: _endCall,
+      onMuteToggle: _toggleMute,
+    ));
+  }
+
+  void _endCall() {
+    Fluttertoast.showToast(msg: 'Call ended');
+    Get.back();
+  }
+
+  void _toggleMute() {
+    Fluttertoast.showToast(msg: 'Mute toggled');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +148,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.call, color: Colors.blue),
-            onPressed: () {},
+            onPressed:_startCall,
           ),
           IconButton(
             icon: const Icon(Icons.more_vert, color: Colors.blue),
