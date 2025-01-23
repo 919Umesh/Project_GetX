@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' as g;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
 import '../../Helper/constants.dart';
 import '../../Helper/get_routes.dart';
 import '../../Helper/shared_preference_fun.dart';
