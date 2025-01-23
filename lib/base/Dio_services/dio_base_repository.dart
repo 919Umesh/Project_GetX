@@ -103,6 +103,7 @@ class BaseRepository {
         String? changedBaseUrl,
         iSJsonDataHeaderType = false}) async {
     if (needsAuthorization) {
+      //If token expired navigate to the login screen clearing the previous fields
       String token = await SharedPreferencesHelper.getString(
           key: SharedPreferenceKey.token);
       if (token.isNotEmpty) {
