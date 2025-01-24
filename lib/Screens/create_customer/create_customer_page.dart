@@ -125,12 +125,14 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
   Future<void> _saveForm() async {
     try {
       if (controller.formKeyCustomer.currentState!.saveAndValidate()) {
+        //To parse the form data in the json data form
         final formData = {
           'name': controller.formKeyCustomer.currentState!.value['name'],
           'email': controller.formKeyCustomer.currentState!.value['email'],
           'password': controller.formKeyCustomer.currentState!.value['password'],
         };
 
+        //Print the all fields
         debugPrint('Name: ${formData['name']}');
         debugPrint('Email: ${formData['email']}');
         debugPrint('Password: ${formData['password']}');
