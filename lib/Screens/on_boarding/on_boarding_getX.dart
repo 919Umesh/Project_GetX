@@ -5,6 +5,8 @@ import 'package:lottie_screen_onboarding_flutter/introduction.dart';
 class OnBoardingController extends GetxController {
   final isLoading = false.obs;
 
+
+  //Lotte json animation
   final List<Introduction> list = [
     Introduction(
       lottieUrl: 'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json',

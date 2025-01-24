@@ -5,6 +5,7 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:get_test/Screens/on_boarding/on_boarding_getX.dart';
 import 'package:lottie_screen_onboarding_flutter/introscreenonboarding.dart';
 
+//This screen comes on the beginning of the app
 class OnBoardingScreen extends GetView<OnBoardingController> {
   const OnBoardingScreen({super.key});
 
