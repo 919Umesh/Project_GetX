@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get_test/Helper/constants.dart';
 import 'package:get_test/Models/client_model.dart';
-import 'package:get_test/Screens/client/clientprofile/create_client.dart';
 import 'package:get_test/Screens/reusable/custom_draggable_empty.dart';
 import 'package:get_test/Screens/reusable/icon_button_b.dart';
 import 'package:get_test/utils/figmaUtils/design_utils.dart';
+
+import '../create_event/create_event_page.dart';
+import '../project_homepage/project_homepage.dart';
 
 class CustomDropdownFormField extends StatelessWidget {
   final String name;
@@ -94,7 +96,7 @@ class CustomDropdownFormField extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return const CustomDraggableEmpty(
                                     initialheight: 0.65,
-                                    childWidget: CreateClientPage());
+                                    childWidget: ProjectHomepageAdmin());
                               },
                             );
                           },
@@ -127,7 +129,7 @@ class CustomDropdownFormField extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     builder: (BuildContext context) {
                       return const CustomDraggableEmpty(
-                          initialheight: 0.65, childWidget: CreateClientPage());
+                          initialheight: 0.65, childWidget: CreateEventPage());
                     },
                   );
                 },

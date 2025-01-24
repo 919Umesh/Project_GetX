@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_test/Screens/homepage/homepage_controller.dart';
-import 'package:get_test/Screens/homepage/managerpages/projectpages/projectdetails/project_detail_wrapper_getx.dart';
 import '../project_homepage/project_homepage_controller.dart';
-import '../project_homepage/project_homepage_pages/project_homepage_wrapper_getX.dart';
+
 import 'icon_button_b.dart';
 
-class CustomTabButtonH extends GetView<HomePageAdminController> {
+class CustomTabButtonH extends GetView<ProjectHomepageController> {
   final String text;
   final int index;
 
@@ -30,7 +28,7 @@ class CustomTabButtonH extends GetView<HomePageAdminController> {
   }
 }
 
-class CustomTabButtonProj extends GetView<ProjectDetailWrapperGetx> {
+class CustomTabButtonProj extends GetView<ProjectHomepageController> {
   final String text;
   final int index;
 
