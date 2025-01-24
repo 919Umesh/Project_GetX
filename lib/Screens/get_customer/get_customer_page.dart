@@ -24,6 +24,7 @@ class GetCustomerPage extends GetView<GetCustomerController> {
         ),
         centerTitle: true,
       ),
+      //Obx means the content are reactive
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(
