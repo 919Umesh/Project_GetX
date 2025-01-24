@@ -13,10 +13,7 @@ class ProjectResponseModel {
     return ProjectResponseModel(
       status: json["status"] ?? 0,
       message: json["message"] ?? "",
-      projects: json["projects"] == null
-          ? []
-          : List<ProjectModel>.from(
-          json["projects"]!.map((x) => ProjectModel.fromJson(x))),
+      projects: json["projects"] == null ? [] : List<ProjectModel>.from(json["projects"]!.map((x) => ProjectModel.fromJson(x))),
     );
   }
 
