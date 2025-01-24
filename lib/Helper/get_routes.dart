@@ -15,19 +15,6 @@ import '../Screens/project_homepage/search_project/search_project_page.dart';
 
 class Routes {
   Routes._();
-
-  static const String homePageAdmin = '/homePageAdmin';
-  static const String signin = '/signin';
-  static const String signupadmin = '/signupadmin';
-  static const String createProjectPage = '/createProjectPage';
-  static const String projectDetailWrapper = '/projectDetailWrapper';
-  static const String projectReportDetailPage = '/projectReportDetailPage';
-  static const String createReport = '/createReport';
-  static const String createInventory = '/createInventory';
-  static const String managerProfile = '/managerProfile';
-  static const String clientHome = '/clientHome';
-  static const String clientProfile = '/clientProfile';
-  static const String createClient = '/createClient';
   static const String orderReport = '/orderReport';
   static const String createProduct = '/createProduct';
   static const String createCustomer = '/createCustomer';

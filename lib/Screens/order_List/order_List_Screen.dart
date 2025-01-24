@@ -49,10 +49,6 @@ class OrderListScreen extends GetView<OrderReportController> {
                       final order = controller.orderList[index];
                       return InkWell(
                         onTap: () {
-                          Get.toNamed(
-                            Routes.homePageAdmin,
-                            arguments: {'projectId': order.vNo}, // Passing data
-                          );
                         },
                         child: ListTile(
                           title: Text('GLCode: ${order.glcode}'),
@@ -73,12 +69,7 @@ class OrderListScreen extends GetView<OrderReportController> {
           );
         }
       }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(Routes.homePageAdmin);
-        },
-        child: const Icon(Icons.add),
-      ),
+
     );
   }
 }
