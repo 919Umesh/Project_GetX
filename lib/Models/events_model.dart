@@ -1,13 +1,3 @@
-// message": "Events retrieved successfully",
-// "events": [
-// {
-// "_id": "677e58bf47ed9660b80ebf0f",
-// "title": "New Year Celebration",
-// "description": "Celebrate the New Year with family and friends.",
-// "date": "2025-01-01T00:00:00.000Z",
-// "__v": 0
-// },
-
 class EventResponseModel {
   EventResponseModel({
     required this.status,
