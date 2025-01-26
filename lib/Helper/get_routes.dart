@@ -43,7 +43,7 @@ class Routes {
     GetPage(name: eventPage, page: () =>  const GetEventsPage()),
     GetPage(name: createEventPage, page: () =>  const CreateEventPage()),
     GetPage(name: chatScreen, page: () =>  const ChatScreen()),
-    GetPage(name: createProductLocal, page: () =>  const CreateProductPage()),
+    GetPage(name: createProductLocal, page: () =>  CreateProductPage()),
     GetPage(name: getProductPage, page: () =>  const GetProductPage()),
     GetPage(name: loginLocal, page: () =>  const LoginLocalPage()),
   ];

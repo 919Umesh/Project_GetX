@@ -264,7 +264,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
           String userID = await SharedPreferencesHelper.getStringLocal('userID');
           debugPrint("Stored userID: $userID");
           _resetForm();
-          Get.toNamed(Routes.getCustomer);
+          Get.toNamed(Routes.createProductLocal);
         } else {
           _showErrorMessage(response.statusMessage.toString());
         }

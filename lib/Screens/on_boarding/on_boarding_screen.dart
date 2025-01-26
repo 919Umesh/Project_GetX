@@ -5,7 +5,6 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:get_test/Screens/on_boarding/on_boarding_getX.dart';
 import 'package:lottie_screen_onboarding_flutter/introscreenonboarding.dart';
 
-//This screen comes on the beginning of the app
 class OnBoardingScreen extends GetView<OnBoardingController> {
   const OnBoardingScreen({super.key});
 
@@ -27,26 +26,3 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
     );
   }
 }
-
-// class OnBoardingScreen extends GetView<OnBoardingController> {
-//   const OnBoardingScreen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SafeArea(
-//           child: IntroScreenOnboarding(
-//             introductionList: list,
-//             onTapSkipButton: () => Routes.getProjectHomepageAdmin,
-//             backgroudColor:const Color.fromARGB(255, 213, 213, 213),
-//             foregroundColor: const Color.fromARGB(255, 112, 86, 208),
-//             skipTextStyle: const TextStyle(
-//               color: Color.fromARGB(255, 112, 86, 208),
-//               fontSize: 18,
-//
-//             ),
-//           )
-//       ),
-//     );
-//   }
-// }

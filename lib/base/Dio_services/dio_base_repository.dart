@@ -96,14 +96,14 @@ class BaseRepository {
   }
 
   Future<Response> postDataToServer(String url, FormData baseFormData,
-      {bool needsAuthorization = false,
-        jsonData,
+      {
+        bool needsAuthorization = false,
+        dynamic jsonData,
         bool defaultsnackbar = true,
         bool changeBaseUrl = false,
         String? changedBaseUrl,
-        iSJsonDataHeaderType = false}) async {
+        bool iSJsonDataHeaderType = false}) async {
     if (needsAuthorization) {
-      //If token expired navigate to the login screen clearing the previous fields
       String token = await SharedPreferencesHelper.getString(
           key: SharedPreferenceKey.token);
       if (token.isNotEmpty) {
