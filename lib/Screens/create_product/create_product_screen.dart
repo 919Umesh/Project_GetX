@@ -395,12 +395,9 @@ class CreateProductPage extends GetView<CreateProductController> {
     }
 
     if (controller.formKeyProduct.currentState!.saveAndValidate()) {
-      debugPrint('------------------Before-----------------');
 
       final fields = controller.formKeyProduct.currentState!.fields;
       final fieldValues = fields.map((key, value) => MapEntry(key, value.value));
-
-
       final dateFormat = DateFormat('yyyy-MM-dd');
       if (fields['fromDate']?.value != null) {
         fieldValues['fromDate'] = dateFormat.format(fields['fromDate']!.value as DateTime);
@@ -408,13 +405,10 @@ class CreateProductPage extends GetView<CreateProductController> {
       if (fields['toDate']?.value != null) {
         fieldValues['toDate'] = dateFormat.format(fields['toDate']!.value as DateTime);
       }
-
-      debugPrint('Form Fields After Date Formatting: $fieldValues');
-      debugPrint('Selected Image File: ${controller.fileimageFile}');
       try {
         d.Response response = await createProductRepository.createProduct(d.FormData.fromMap(controller.formKeyProduct.currentState!.value,),);
         if (response.statusCode == 201 || response.statusCode == 200) {
-          Get.offAndToNamed(Routes.loginLocal);
+          Fluttertoast.showToast(msg: 'Success');
         } else {
           Get.snackbar(
             'Error',
