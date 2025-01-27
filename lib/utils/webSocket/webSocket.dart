@@ -29,7 +29,6 @@ class WebSocketService {
     });
   }
 
-  /// Setup WebRTC signaling listeners
   void _setupWebRTCListeners() {
     socket?.on('offer', (data) async {
       debugPrint('Offer received: $data');
@@ -66,7 +65,7 @@ class WebSocketService {
     });
   }
 
-  /// Create a WebRTC peer connection
+
   Future<void> _createPeerConnection() async {
     if (peerConnection != null) return;
 
@@ -84,7 +83,6 @@ class WebSocketService {
       await peerConnection?.addTrack(track, localStream!);
     }
 
-    // Handle ICE candidates
     peerConnection?.onIceCandidate = (candidate) {
       if (candidate != null) {
         socket?.emit('ice-candidate', {

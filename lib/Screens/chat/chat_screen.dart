@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-
 
   late String userId;
   late  String receiverId;
@@ -111,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _startRinging() async {
     _isRinging = true;
-    await _audioPlayer.play('assets/ring/ring.mp3');
+    await _audioPlayer.play(AssetSource('ring/ring.mp3'));
   }
 
   void _stopRinging() async {
