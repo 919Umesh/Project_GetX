@@ -149,7 +149,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
   void _startCall() {
-    _webSocketService.startCall(receiverId);
+    _webSocketService.startCall(userId,receiverId);
     Fluttertoast.showToast(msg: 'Starting call...');
 
     Get.to(() => AudioCallScreen(

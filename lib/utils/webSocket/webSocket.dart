@@ -103,7 +103,7 @@ class WebSocketService {
   }
 
 
-  void startCall(String receiverId) async {
+  void startCall(String senderId,String receiverId) async {
     remoteUserId = receiverId;
     await _createPeerConnection();
 
@@ -111,7 +111,7 @@ class WebSocketService {
     await peerConnection?.setLocalDescription(offer!);
 
     socket?.emit('offer', {
-      'senderId': socket?.id,
+      'senderId': senderId,
       'receiverId': receiverId,
       'offer': {'sdp': offer?.sdp, 'type': offer?.type},
     });
