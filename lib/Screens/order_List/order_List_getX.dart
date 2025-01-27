@@ -26,7 +26,7 @@ class OrderReportController extends GetxController {
     }
 
     try {
-      // Fetch data from the repository
+      // Fetch data from the API
       final model = await createOrderReport.getOrderReport(
         'ERPDEMO101',
         '7',
