@@ -261,10 +261,8 @@ class LoginLocalPage extends GetView<LoginLocalController> {
           _showSuccessMessage(response.statusMessage.toString());
           await SharedPreferencesHelper.saveStringLocal('Token', response.data['token']);
           await SharedPreferencesHelper.saveStringLocal('userID', response.data['user']['id']);
-          String userID = await SharedPreferencesHelper.getStringLocal('userID');
-          debugPrint("Stored userID: $userID");
           _resetForm();
-          Get.toNamed(Routes.createProductLocal);
+          Get.toNamed(Routes.getCustomer);
         } else {
           _showErrorMessage(response.statusMessage.toString());
         }
