@@ -36,7 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     _webSocketService.connect(userId);
     _chatController.initChat(userId, receiverId);
-    _chatController.fetchMessageHistory();
+      _chatController.fetchMessageHistory();
 
     _webSocketService.socket?.on('chatMessage', (data) {
       _chatController.messageList.add(MessageModel(
@@ -49,6 +49,23 @@ class _ChatScreenState extends State<ChatScreen> {
       ));
       _scrollToBottom();
     });
+    _webSocketService.socket?.on('incomingCall', (data) {
+      _showIncomingCallDialog(data['senderId'], data['senderName']);
+    });
+
+    _webSocketService.socket?.on('callResponse', (data) {
+      if (data['response'] == 'accepted') {
+        Get.to(() => AudioCallScreen(
+          username: username,
+          isMuted: false,
+          onEndCall: _endCall,
+          onMuteToggle: _toggleMute,
+        ));
+      } else {
+        Fluttertoast.showToast(msg: 'Call declined');
+      }
+      _stopRinging();
+    });
   }
 
   void _scrollToBottom() {
@@ -60,11 +77,56 @@ class _ChatScreenState extends State<ChatScreen> {
       );
     }
   }
+  void _showIncomingCallDialog(String senderId, String senderName) {
+    _startRinging();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Incoming Call from $senderName'),
+          content: const Text('Do you want to accept the call?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _webSocketService.sendCallResponse(receiverId, senderId, 'accepted');
+                Navigator.of(context).pop();
+              },
+              child: const Text('Accept'),
+            ),
+            TextButton(
+              onPressed: () {
+                _webSocketService.sendCallResponse(receiverId, senderId, 'declined');
+                Navigator.of(context).pop();
+              },
+              child: const Text('Decline'),
+            ),
+          ],
+        );
+      },
+    ).then((value) {
+      _stopRinging();
+    });
+  }
+
+  void _startRinging() async {
+    _isRinging = true;
+    await _audioPlayer.play('assets/ring/ring.mp3');
+  }
+
+  void _stopRinging() async {
+    if (_isRinging) {
+      await _audioPlayer.stop();
+      _isRinging = false;
+    }
+  }
+
 
   @override
   void dispose() {
     _webSocketService.disconnect();
     _scrollController.dispose();
+    _audioPlayer.dispose();
     super.dispose();
   }
 

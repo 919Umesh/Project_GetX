@@ -1,4 +1,3 @@
-//Web Socket for the Chat and Audio Call
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,7 +9,6 @@ class WebSocketService {
   MediaStream? localStream;
   String? remoteUserId;
 
-  /// Connect to the WebSocket server with the given userId
   void connect(String userId) {
     socket = IO.io('http://192.168.1.64:3000', <String, dynamic>{
       'transports': ['websocket'],
@@ -101,14 +99,12 @@ class WebSocketService {
       }
     };
 
-    // Handle incoming remote tracks
     peerConnection?.onTrack = (RTCTrackEvent event) {
       debugPrint('Remote track added');
-      // Handle remote track (e.g., play remote audio)
     };
   }
 
-  /// Start a call with the given receiverId
+
   void startCall(String receiverId) async {
     remoteUserId = receiverId;
     await _createPeerConnection();
@@ -123,7 +119,7 @@ class WebSocketService {
     });
   }
 
-  /// Send a chat message to the receiver
+
   void sendMessage(String senderId, String receiverId, String message) {
     if (socket != null && socket?.connected == true) {
       socket?.emit('chatMessage', {
@@ -137,6 +133,13 @@ class WebSocketService {
     }
   }
 
+  void sendCallResponse(String receiverId, String senderId, String response) {
+    socket?.emit('callResponse', {
+      'receiverId': receiverId,
+      'senderId': senderId,
+      'response': response,
+    });
+  }
   void disconnect() {
     localStream?.dispose();
     peerConnection?.close();
