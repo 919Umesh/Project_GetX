@@ -155,7 +155,6 @@ class BaseRepository {
     if (needsAuthorization) {
       String token = await SharedPreferencesHelper.getStringLocal('Token');
       if (token.isNotEmpty) {
-        //If token expired navigate to the login screen clearing the previous fields
         if (JwtDecoder.isExpired(token)) {
           await SharedPreferencesHelper.removeKeyLocal('Token');
           Get.offAllNamed(Routes.loginLocal);
