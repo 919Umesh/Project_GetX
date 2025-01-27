@@ -7,7 +7,7 @@ class ApiEndpoint {
 
   static const String getOrderReport = '/MasterList/PendingOrderVerifyList/';
   static const String createProduct = '/GeneralLedger/SaveProductRelated/';
-  static const String createCustomer= '/users/create/';
+  static const String createCustomer= '/users/createUser';
   static const String createEvent= '/event/createEvent/';
   static const String getCustomer= '/users/getUsers';
   static const String getEvents= '/event/getEvents/';

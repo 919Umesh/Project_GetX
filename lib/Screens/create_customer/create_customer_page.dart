@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide FormData, Response;
 import 'package:get_test/utils/figmaUtils/design_utils.dart';
 import '../../Helper/constants.dart';
-import '../../Helper/get_routes.dart';
 import '../reusable/icon_button_b.dart';
 import 'create_customer_getX.dart';
 import 'create_customer_repo.dart';
+import 'package:dio/dio.dart' as d;
 
 class CreateCustomerPage extends GetView<CreateCustomerController> {
   const CreateCustomerPage({super.key});
@@ -14,17 +15,8 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(Routes.getCustomer),
-        child: const Icon(Icons.add),
-      ),
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,
-        actions: [
-          IconButton(onPressed: (){
-            Get.toNamed(Routes.getQuill);
-          }, icon: const Icon(Icons.add))
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -53,6 +45,7 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
           _buildTextField(
             context,
             label: 'name',
+            initialValue: 'Samsung',
             name: 'name',
             validator: (value) =>
             value == null || value.isEmpty ? 'Please enter a valid name.' : null,
@@ -61,6 +54,7 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
           _buildTextField(
             context,
             label: 'email',
+            initialValue: 'testrohit45@gmail.com',
             name: 'email',
             validator: (value) =>
             value == null || value.isEmpty ? 'Please enter a valid email.' : null,
@@ -69,6 +63,7 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
           _buildTextField(
             context,
             label: 'password',
+            initialValue: 'global@8848',
             name: 'password',
             validator: (value) =>
             value == null || value.isEmpty ? 'Please enter a valid password.' : null,
@@ -82,6 +77,7 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
       BuildContext context, {
         required String label,
         required String name,
+        required String initialValue,
         required String? Function(String?)? validator,
       }) {
     return Column(
@@ -93,6 +89,7 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
         ),
         const SizedBox(height: 10),
         FormBuilderTextField(
+          initialValue: initialValue,
           name: name,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
@@ -125,53 +122,28 @@ class CreateCustomerPage extends GetView<CreateCustomerController> {
   Future<void> _saveForm() async {
     try {
       if (controller.formKeyCustomer.currentState!.saveAndValidate()) {
-        //To parse the form data in the json data form
-        final formData = {
-          'name': controller.formKeyCustomer.currentState!.value['name'],
-          'email': controller.formKeyCustomer.currentState!.value['email'],
-          'password': controller.formKeyCustomer.currentState!.value['password'],
-        };
-
-        //Print the all fields
-        debugPrint('Name: ${formData['name']}');
-        debugPrint('Email: ${formData['email']}');
-        debugPrint('Password: ${formData['password']}');
-
-        final response = await createCustomerRepository.createCustomer(formData);
-
-        if (response.statusCode == 201) {
-          _showSuccessMessage(response.statusMessage.toString());
-          _resetForm();
-        } else {
-          _showErrorMessage(response.statusMessage.toString());
+        try {
+          d.Response response = await createCustomerRepository.createCustomer(d.FormData.fromMap(controller.formKeyCustomer.currentState!.value,),);
+          if (response.statusCode == 201 || response.statusCode == 200) {
+            Fluttertoast.showToast(msg: 'Success');
+          } else {
+            Get.snackbar(
+              'Error',
+              'Failed to create product',
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          }
+        } catch (e) {
+          Get.snackbar(
+            'Error',
+            'An error occurred: ${e.toString()}',
+            snackPosition: SnackPosition.BOTTOM,
+          );
         }
       }
     } catch (e) {
       _showCatchMessage(e.toString());
     }
-  }
-  void _resetForm() {
-    controller.formKeyCustomer.currentState?.reset();
-  }
-  void _showSuccessMessage(String message) {
-    Get.snackbar(
-      "Success",
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-      duration: const Duration(seconds: 3),
-    );
-  }
-  void _showErrorMessage(String message) {
-    Get.snackbar(
-      "Error",
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-      duration: const Duration(seconds: 3),
-    );
   }
   void _showCatchMessage(String e) {
     Get.snackbar(

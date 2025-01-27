@@ -134,9 +134,9 @@ class BaseRepository {
     } on DioException catch (e) {
       debugPrint('\n postDataToServer error message : ${e.message}');
       debugPrint('\n postDataToServer error : ${e.error}');
-      debugPrint('-------------gdf-----');
-      debugPrint(jsonData.toString());
-      debugPrint(baseFormData.fields.toString());
+      debugPrint('-------------gdf-------');
+      debugPrint('Json Data:${jsonData.toString()}');
+      debugPrint('Base Form Data:${baseFormData.fields.toString()}');
 
       debugPrint('\n postDataToServer error response : ${e.response}');
       result = handleDioError(e, defaultsnackbar);

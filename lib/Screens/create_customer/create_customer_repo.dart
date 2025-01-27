@@ -3,13 +3,13 @@ import 'package:get_test/base/Api_end_point/api_endpoints.dart';
 import 'package:get_test/base/Dio_services/dio_base_repository.dart';
 
 class CreateCustomerRepository extends BaseRepository {
-  Future<Response> createCustomer(Map<String, dynamic> jsonData) async {
-    return await postDataToServerTest(
+  Future<Response> createCustomer(FormData formData) async {
+    var result= postDataToServer(
       ApiEndpoint.createCustomer,
-      jsonData: jsonData,
+      formData,
       needsAuthorization: false,
-      iSJsonDataHeaderType: true,
     );
+    return result;
   }
 }
 

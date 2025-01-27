@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:get_test/utils/figmaUtils/design_utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import '../../Helper/get_routes.dart';
 import '../reusable/loading_button.dart';
 import 'create_product_getX.dart';
 import 'create_product_repo.dart';
@@ -395,7 +394,6 @@ class CreateProductPage extends GetView<CreateProductController> {
     }
 
     if (controller.formKeyProduct.currentState!.saveAndValidate()) {
-
       final fields = controller.formKeyProduct.currentState!.fields;
       final fieldValues = fields.map((key, value) => MapEntry(key, value.value));
       final dateFormat = DateFormat('yyyy-MM-dd');
