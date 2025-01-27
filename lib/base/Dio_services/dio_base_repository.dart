@@ -170,6 +170,8 @@ class BaseRepository {
         dio!.options.baseUrl = ApiEndpoint.baseUrl;
       }
     }
+    debugPrint('--------------Server---------');
+    debugPrint(ApiEndpoint.baseUrl+url);
     Response? result;
     try {
       var result = await dio!.get(url,

@@ -22,7 +22,7 @@ class GetTest extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       initialBinding: AppBindings(),
-      initialRoute: Routes.createProductLocal,
+      initialRoute: Routes.loginLocal,
       getPages: Routes.routes,
     );
   }
