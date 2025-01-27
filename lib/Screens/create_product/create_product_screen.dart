@@ -254,18 +254,30 @@ class CreateProductPage extends GetView<CreateProductController> {
                         },
                       ),
                       SizedBox(height: 20.adaptSize),
-
-                      Text(
-                        'Product Image',
-                        style: context.textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: 10),
-                      LoadingButton(
-                        onPressed: () => _showImagePickerDialog(context),
-                        child: Text(
-                          'Upload Image',
-                          style: context.textTheme.titleSmall?.copyWith(color: Colors.white),
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Product Image',
+                            style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 10),
+                          GestureDetector(
+                            onTap: () {
+                              _showImagePickerDialog(context);
+                            },
+                            child: CircleAvatar(
+                              radius: 50.0,
+                              backgroundColor: Colors.grey.shade300,
+                              child: picture(),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            'Tap to change image',
+                            style: context.textTheme.bodySmall?.copyWith(color: Colors.blue),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -287,6 +299,19 @@ class CreateProductPage extends GetView<CreateProductController> {
       ),
     );
   }
+
+  picture() {
+    if (controller.fileimageFile == null) {
+      return const CircleAvatar(
+        radius: 50.0,
+        backgroundImage: AssetImage('assets/images/get1.jpg'),
+      );
+    } else {
+      return CircleAvatar(radius: 50.0, backgroundImage: FileImage(controller.fileimageFile!));
+    }
+  }
+
+
 
   Future<void> _showImagePickerDialog(BuildContext context) {
     return showModalBottomSheet(
@@ -389,7 +414,6 @@ class CreateProductPage extends GetView<CreateProductController> {
 
   Future<void> _saveForm() async {
     if (controller.multiPartPhoto != null) {
-      Fluttertoast.showToast(msg: 'Image');
       controller.formKeyProduct.currentState!.fields['productImage']!.didChange(controller.multiPartPhoto);
     }
 
