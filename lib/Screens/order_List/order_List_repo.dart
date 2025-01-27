@@ -21,8 +21,8 @@ class CreateClientRepository extends BaseRepository {
         'UserCode': '',
         'Glcode': '',
         'Agentcode': agentCode,
-        'Page': page, // Pass page number for pagination
-        'PageSize': pageSize, // Pass page size for pagination
+        'Page': page,
+        'PageSize': pageSize,
       },
     );
     return OrderReportModel.fromJson(response.data);

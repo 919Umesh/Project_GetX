@@ -25,9 +25,7 @@ class OrderReportController extends GetxController {
     }
 
     try {
-      final model = await createOrderReport.getOrderReport(
-        'ERPDEMO101',
-        '7',
+      final model = await createOrderReport.getOrderReport('ERPDEMO101', '7',
         page: currentPage.value,
         pageSize: pageSize,
       );
