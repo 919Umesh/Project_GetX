@@ -46,6 +46,7 @@ dependencies:
   nepali_utils: ^3.0.6
   flutter_webrtc: ^0.12.6
   jwt_decoder: ^2.0.1
+  audioplayers: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/ring/
 
 
   fonts:

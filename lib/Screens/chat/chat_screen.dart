@@ -23,6 +23,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final WebSocketService _webSocketService = WebSocketService();
   final GetChatController _chatController = Get.put(GetChatController());
   final ScrollController _scrollController = ScrollController();
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  bool _isRinging = false;
 
   @override
   void initState() {
