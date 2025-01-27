@@ -10,9 +10,11 @@ class OrderListScreen extends GetView<OrderReportController> {
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
 
+    // Add scroll listener for pagination
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && controller.hasMoreData.value) {
-        controller.loadMoreOrders();
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent &&
+          controller.hasMoreData.value) {
+        controller.loadMoreOrders(); // Load more data when scrolled to the bottom
       }
     });
 
@@ -22,7 +24,7 @@ class OrderListScreen extends GetView<OrderReportController> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.toNamed(Routes.createProduct);
+              Get.toNamed(Routes.createProduct); // Navigate to create product screen
             },
             icon: const Icon(Icons.add),
           ),
@@ -31,11 +33,11 @@ class OrderListScreen extends GetView<OrderReportController> {
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(), // Show loading indicator
           );
         } else if (controller.orderList.isEmpty) {
           return const Center(
-            child: Text('No orders available'),
+            child: Text('No orders available'), // Show empty state
           );
         } else {
           return Column(
@@ -43,12 +45,13 @@ class OrderListScreen extends GetView<OrderReportController> {
               Expanded(
                 child: ListView.builder(
                   controller: scrollController,
-                  itemCount: controller.orderList.length + 1,
+                  itemCount: controller.orderList.length + 1, // +1 for loading indicator
                   itemBuilder: (context, index) {
                     if (index < controller.orderList.length) {
                       final order = controller.orderList[index];
                       return InkWell(
                         onTap: () {
+                          // Handle order item tap
                         },
                         child: ListTile(
                           title: Text('GLCode: ${order.glcode}'),
@@ -57,10 +60,10 @@ class OrderListScreen extends GetView<OrderReportController> {
                       );
                     } else if (controller.hasMoreData.value) {
                       return const Center(
-                        child: CircularProgressIndicator(),
-                      ); // Loading indicator at the bottom
+                        child: CircularProgressIndicator(), // Show loading indicator at the bottom
+                      );
                     } else {
-                      return const SizedBox.shrink(); // No more data
+                      return const SizedBox.shrink(); // Hide if no more data
                     }
                   },
                 ),
@@ -69,9 +72,6 @@ class OrderListScreen extends GetView<OrderReportController> {
           );
         }
       }),
-
     );
   }
 }
-
-
