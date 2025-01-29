@@ -181,6 +181,7 @@ class BaseRepository {
           queryParameters: params,
           onReceiveProgress: (sent, total) {});
       print('--------base------------');
+      print('Successfully Posted Data');
       print(result.data);
       return result;
     } on DioException catch (e) {
