@@ -171,6 +171,7 @@ class BaseRepository {
       }
     }
     debugPrint('--------------Server---------');
+    debugPrint('Base URL Complete');
     debugPrint(ApiEndpoint.baseUrl+url);
     Response? result;
     try {
