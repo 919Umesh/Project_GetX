@@ -171,9 +171,7 @@ class BaseRepository {
       }
     }
     debugPrint('--------------Server---------');
-    debugPrint('Base URL Complete');
     debugPrint(ApiEndpoint.baseUrl+url);
-    debugPrint('URL');
     Response? result;
     try {
       var result = await dio!.get(url,
@@ -181,7 +179,6 @@ class BaseRepository {
           queryParameters: params,
           onReceiveProgress: (sent, total) {});
       print('--------base------------');
-      print('Successfully Posted Data');
       print(result.data);
       return result;
     } on DioException catch (e) {
