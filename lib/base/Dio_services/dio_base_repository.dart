@@ -179,6 +179,7 @@ class BaseRepository {
           queryParameters: params,
           onReceiveProgress: (sent, total) {});
       print('--------base------------');
+      print('Success');
       print(result.data);
       return result;
     } on DioException catch (e) {
