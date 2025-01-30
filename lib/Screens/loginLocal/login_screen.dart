@@ -122,7 +122,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.blue,
@@ -134,10 +134,10 @@ class LoginLocalPage extends GetView<LoginLocalController> {
           obscureText: isPassword,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
-          style: TextStyle(color: Colors.blue),
+          style: const TextStyle(color: Colors.blue),
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.blue),
+            hintStyle: const TextStyle(color: Colors.blue),
             prefixIcon: Icon(prefixIcon, color: Colors.blue),
             contentPadding: const EdgeInsets.symmetric(
               vertical: 16.0,
@@ -145,15 +145,15 @@ class LoginLocalPage extends GetView<LoginLocalController> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: const BorderSide(color: Colors.blue),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: const BorderSide(color: Colors.blue),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: const BorderSide(color: Colors.blue),
             ),
             filled: true,
             fillColor: Colors.white.withOpacity(0.1),
@@ -187,7 +187,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
         onPressed: () {
           // Add forgot password functionality
         },
-        child: Text(
+        child: const Text(
           'Forgot Password?',
           style: TextStyle(
             color: Colors.white,
@@ -229,7 +229,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
 
   Widget _socialButton(IconData icon, String platform) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.circular(12),
@@ -240,7 +240,7 @@ class LoginLocalPage extends GetView<LoginLocalController> {
           const SizedBox(width: 8),
           Text(
             platform,
-            style: TextStyle(color: Colors.blue),
+            style: const TextStyle(color: Colors.blue),
           ),
         ],
       ),
